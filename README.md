@@ -73,8 +73,7 @@ Feedback & Corrections → feedback.csv → Retraining
 ### **Clone Repository**
 
 ```
-git clone <repo_link>
-cd project_folder
+git clone https://github.com/Preethamkumarkothakonda/FinClassify.git
 ```
 
 ### **Install Dependencies**

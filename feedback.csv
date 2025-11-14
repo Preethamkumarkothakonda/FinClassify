@@ -1,0 +1,15 @@
+description,predicted,corrected,timestamp,corrected_ui
+IRCTC – Sleeper class ticket,Travel,Groceries,2025-11-14 16:13:13.530278,
+BigBasket – Monthly grocery order,Shopping,Groceries,2025-11-14 16:13:42.872834,
+BigBasket – Monthly grocery order,Shopping,Groceries,2025-11-14 16:13:59.823040,
+BigBasket – Monthly grocery order,Shopping,Groceries,2025-11-14 16:15:28.129148,
+Zerodha – Equity purchase order,Groceries,Others,2025-11-14 16:24:59.561258,Banking and Investments
+Dr Lal PathLabs – Full body checkup,Shopping,Healthcare,2025-11-14 16:25:56.032476,Healthcare
+Dr Lal PathLabs – Full body checkup,Shopping,Healthcare,2025-11-14 16:26:11.003680,Healthcare
+Urban Company – Home cleaning service,Shopping,Others,2025-11-14 16:33:08.272615,Others
+payment to kaventors,Rent,Food & Dining,2025-11-14 19:10:24.757128,Food & Dining
+payment to kaventors,Rent,Food & Dining,2025-11-14 19:11:41.693890,Food & Dining
+payment to kaventors,Others,Food & Dining,2025-11-14 19:12:35.009945,Food & Dining
+hpcl petrol,Others,Fuel,2025-11-14 19:40:32.130943,Fuel
+hpcl petrol,Others,Fuel,2025-11-14 19:40:43.317104,Fuel
+hpcl petrol,Others,Fuel,2025-11-14 19:40:57.456515,Fuel

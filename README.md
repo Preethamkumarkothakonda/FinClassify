@@ -4,7 +4,7 @@
 
 # **FinClassify – Autonomous Transaction Categorization System**
 
-### *GHCI Hackathon 2024 Submission*
+### *GHCI Hackathon 2025 Submission*
 
 ---
 

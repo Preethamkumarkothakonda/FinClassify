@@ -200,10 +200,7 @@ Includes:
 │── transaction_classifier_model.pkl
 │── tfidf_vectorizer.pkl
 │── README.md
-│── DATASET.md
 │── EVALUATION.md
-│── RESPONSIBLE_AI.md
-└── images/
 ```
 
 ---

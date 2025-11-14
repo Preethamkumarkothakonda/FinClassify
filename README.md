@@ -1,6 +1,5 @@
 
 ---
-
 # **README.md**
 
 # **FinClassify – Autonomous Transaction Categorization System**

@@ -1,125 +1,111 @@
-FinClassify – Autonomous Transaction Categorization System
-GHCI Hackathon 2024 Submission
-1. Overview
+Here is your **README.md exactly as requested—clean, formatted, and ready to copy-paste**.
 
-FinClassify is an end-to-end, fully autonomous transaction categorization system built for the GHCI Hackathon.
-It transforms raw financial transaction descriptions into predefined spending categories with:
+---
 
-High accuracy (Macro F1 = 1.00)
+# **README.md**
 
-Fully offline inference (no external APIs)
+# **FinClassify – Autonomous Transaction Categorization System**
 
-Config-driven taxonomy (editable by admin)
+### *GHCI Hackathon 2024 Submission*
 
-Human-in-the-loop correction and retraining
+---
 
-SHAP explainability
+## **1. Overview**
 
-Robust preprocessing & noise handling
+**FinClassify** is an end-to-end, fully autonomous transaction categorization system built for the GHCI Hackathon.
+It converts raw financial transaction descriptions into predefined spending categories with:
 
-The system is designed to be transparent, configurable, and responsible, fulfilling all hackathon requirements.
+* High accuracy (Macro F1 = **1.00**)
+* Fully offline inference
+* Config-driven taxonomy
+* Human-in-loop correction
+* SHAP explainability
+* Robust text preprocessing
 
-2. Features
-✔ End-to-End Offline Categorization
+The system is designed to be **transparent, configurable, responsible**, and meets all required hackathon criteria.
 
-Takes raw text → cleans → vectorizes → classifies → returns label + confidence.
+---
 
-✔ Configurable Taxonomy via taxonomy.json
+## **2. Features**
 
-Admin can change categories without editing code.
+### ✔ End-to-End Offline Categorization
 
-✔ Feedback Loop
+Processes text → cleans → vectorizes → classifies → outputs label + confidence.
 
-Users can correct predictions → corrections saved in feedback.csv → model retrains.
+### ✔ Configurable Taxonomy (`taxonomy.json`)
 
-✔ Explainability (SHAP)
+Admin can modify categories **without touching code**.
 
-Users see why the model predicted a category.
+### ✔ Feedback Loop
 
-✔ Fully Local Pipeline
+Users correct predictions → saved to `feedback.csv` → retraining enabled.
 
-All inference and retraining happen inside the environment (mandatory requirement).
+### ✔ Explainability (SHAP)
 
-✔ High Accuracy
+Shows top contributing features for each prediction.
 
-Achieves 1.00 macro F1 on synthetic, balanced dataset.
+### ✔ Noise-Resistant Text Cleaning
 
-✔ Robust Text Cleaning
+Handles uppercase, punctuation, messy merchant names, numeric junk, etc.
 
-Handles noisy descriptions, uppercase, punctuation, POS suffixes, etc.
+### ✔ High Accuracy
 
-3. Project Architecture
-                  ┌─────────────────────────┐
-                  │   taxonomy.json          │
-                  │ (Admin-configurable)     │
-                  └──────────────┬──────────┘
-                                 │
-                         Load categories
-                                 │
-┌──────────────────────────┐     ▼       ┌──────────────────────────┐
-│ Raw Transaction Text      │ ─────────► │  Text Cleaning + TF-IDF  │
-└──────────────────────────┘             └──────────────────────────┘
-                                               │
-                                               ▼
-                                 ┌─────────────────────────┐
-                                 │   Logistic Regression    │
-                                 │ (trained + retrainable) │
-                                 └─────────────────────────┘
-                                               │
-                           ┌───────────────────┴───────────────────┐
-                           ▼                                       ▼
-             ┌───────────────────────┐               ┌──────────────────────────┐
-             │ Predicted Category     │               │ SHAP Explainability       │
-             └───────────────────────┘               └──────────────────────────┘
-                           |
-                           ▼
-        ┌──────────────────────────────────┐
-        │ User Feedback (correction input) │
-        └──────────────────────────────────┘
-                           |
-                           ▼
-                feedback.csv (audit log)
-                           |
-                           ▼
-                   Retraining Pipeline
+Synthetic balanced dataset achieves **1.00 macro F1**.
 
-4. Installation
-Step 1: Clone the Repository
-git clone <your_repo_url>
-cd <project_folder>
+---
 
-Step 2: Install Dependencies
+## **3. Project Architecture**
+
+```
+Raw Text
+   │
+   ▼
+Text Cleaner → TF-IDF Vectorizer → Logistic Regression Model
+   │
+   ├──► Prediction + Confidence
+   ├──► SHAP Explainability
+   ▼
+Feedback & Corrections → feedback.csv → Retraining
+```
+
+---
+
+## **4. Installation**
+
+### **Clone Repository**
+
+```
+git clone <repo_link>
+cd project_folder
+```
+
+### **Install Dependencies**
+
+```
 pip install -r requirements.txt
+```
 
+---
 
-Recommended versions:
+## **5. Run the App**
 
-Python 3.9+
-
-scikit-learn 1.3+
-
-streamlit 1.30+
-
-shap 0.44+
-
-5. Running the App Locally
-
-Launch the Streamlit interface:
-
+```
 streamlit run app.py
+```
 
+---
 
-The browser UI will open automatically.
+## **6. Configurable Taxonomy**
 
-6. Configurable Taxonomy
+Edit categories in:
 
-Categories are located in:
-
+```
 taxonomy.json
+```
 
+Example:
 
-Modify this file to add/remove categories:
-
+```json
 {
   "categories": [
     "Food & Dining",
@@ -137,169 +123,114 @@ Modify this file to add/remove categories:
     "Others"
   ]
 }
+```
 
-The app automatically:
+App auto-updates labels and model mapping.
 
-Loads new categories
+---
 
-Updates dropdown labels
+## **7. Feedback Loop Explained**
 
-Maps unknown labels to “Others”
+1. User enters transaction text
+2. Model predicts category
+3. User corrects if needed
+4. Correction saved in `feedback.csv`
+5. Retraining uses all feedback to improve model
 
-No code change required.
+Example saved feedback row:
 
-7. How the Feedback Loop Works
+```
+UBER TRIP 23, Travel → corrected to Taxi
+```
 
-User enters a transaction
+Retrained model saved as new `.pkl`.
 
-Model predicts category
+---
 
-User reviews and corrects if needed
+## **8. Explainability (SHAP)**
 
-Correction is appended to feedback.csv
+SHAP shows:
 
-Example saved row:
+* Keywords influencing prediction
+* Direction of influence
+* Strength of contribution
 
-description: "UBER TRIP #22193"
-predicted: Travel
-corrected: Others
-corrected_ui: "Taxi"
-timestamp: 2024-11-14 23:05:00
+Example features:
 
+| token     | shap_value | tfidf |
+| --------- | ---------- | ----- |
+| starbucks | 0.41       | 0.92  |
+| coffee    | 0.31       | 0.81  |
 
-Clicking Retrain with Feedback:
+---
 
-Merges corrections into dataset
+### **Macro F1:**
 
-Retrains model
-
-Saves updated TF-IDF + model .pkl files
-
-This ensures continuous, supervised improvement.
-
-8. Explainability (SHAP)
-
-For each prediction, SHAP reveals:
-
-top contributing keywords
-
-whether they increased or decreased probability
-
-token-level impact
-
-Example output:
-
-feature	shap_value	tfidf_value
-starbucks	0.412	0.923
-coffee	0.307	0.812
-txn	0.021	0.322
-
-This allows transparent inspection of model reasoning.
-
-9. Dataset Documentation
-
-Complete dataset details are in:
-
-DATASET.md
-
-
-Summary:
-
-Property	Value
-Source	Synthetic (merchant pattern generation)
-Samples	~1900
-Categories	13
-Balanced	Yes
-Noise simulation	Yes
-
-All synthetic → no privacy risk.
-
-10. Evaluation Results
-
-Full evaluation in:
-
-EVALUATION.md
-
-Macro F1 Score
+```
 1.00
+```
 
-Accuracy
+### **Accuracy:**
+
+```
 1.00
+```
 
-Per-Class F1 Scores
+Per-class F1 ranges 0.99–1.00.
 
-All classes achieved 0.99–1.00.
+---
 
-Confusion Matrix
+Includes:
 
-(Insert confusion matrix image)
+* No personal data
+* No external APIs
+* Balanced dataset
+* SHAP transparency
+* Human oversight
+* Ethical model retraining
 
-11. Responsible AI
+---
 
-Full details in:
+## **12. File Structure**
 
-RESPONSIBLE_AI.md
-
-
-Key principles followed:
-
-No sensitive attributes
-
-No external API calls
-
-SHAP transparency
-
-Human-in-loop feedback
-
-No storage of personal identifiers
-
-Balanced dataset prevents category bias
-
-12. File Structure
-/project-root
-│
-├── app.py
-├── taxonomy.json
-├── synthetic_transactions.csv
-├── feedback.csv
-├── transaction_classifier_model.pkl
-├── tfidf_vectorizer.pkl
-│
-├── README.md
-├── EVALUATION.md
-├── DATASET.md
-├── RESPONSIBLE_AI.md
-│
+```
+/root
+│── app.py
+│── taxonomy.json
+│── synthetic_transactions.csv
+│── feedback.csv
+│── transaction_classifier_model.pkl
+│── tfidf_vectorizer.pkl
+│── README.md
+│── DATASET.md
+│── EVALUATION.md
+│── RESPONSIBLE_AI.md
 └── images/
-      ├── confusion_matrix.png
-      ├── shap_example.png
-      └── app_screenshot.png
+```
 
-13. Future Improvements
+---
 
-Train on real-world bank statement samples (when legally possible)
+## **13. Future Enhancements**
 
-Add neural models (DistilBERT) for more complex phrasing
+* BERT-based transformer model
+* Auto-balancing category engine
+* Live banking feed integration
+* Admin analytics dashboard
 
-Add streaming support for real-time classification
+---
 
-Expand noise-robust data augmentation
+## **14. Conclusion**
 
-Build an admin dashboard for retraining and monitoring
+FinClassify meets **all GHCI Hackathon** requirements:
 
-14. Conclusion
+| Requirement               | Status   |
+| ------------------------- | -------- |
+| End-to-end categorization | ✔        |
+| No external APIs          | ✔        |
+| Macro F1 ≥ 0.90           | ✔ (1.00) |
+| Explainability            | ✔        |
+| Feedback loop             | ✔        |
+| Responsible AI            | ✔        |
+| Dataset documentation     | ✔        |
+| Editable taxonomy         | ✔        |
 
-FinClassify fulfills all GHCI Hackathon requirements:
-
-Requirement	Status
-End-to-end categorization	✔
-No external APIs	✔
-Macro F1 ≥ 0.90	✔ (1.00)
-SHAP explainability	✔
-Human-in-loop	✔
-Configurable taxonomy	✔
-Dataset documentation	✔
-Responsible AI document	✔
-Reproducible pipeline	✔
-
-This system is production-ready for demonstration and robust for future enhancements.

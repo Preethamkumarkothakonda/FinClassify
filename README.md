@@ -1,4 +1,3 @@
-Here is your **README.md exactly as requested—clean, formatted, and ready to copy-paste**.
 
 ---
 

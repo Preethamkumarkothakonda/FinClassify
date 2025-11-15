@@ -5,3 +5,11 @@ scikit-learn
 joblib
 shap
 matplotlib
+
+streamlit
+pandas
+numpy
+scikit-learn
+joblib
+shap
+matplotlib

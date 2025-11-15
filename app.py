@@ -312,7 +312,7 @@ def explain_features(explainer, feature_names, X_vector, predicted_label, model,
 # =========================
 st.set_page_config(page_title="FinClassify", page_icon="🧩", layout="centered")
 st.title("FinClassify")
-st.caption("Config-driven taxonomy, hybrid custom categories, feedback loop + explainability.")
+st.caption("Config-driven taxonomy, feedback loop + explainability.")
 
 defaults = {"last_text": "Starbucks Coffee POS TXN", "pred": None, "conf": None, "X_vec": None}
 for k, v in defaults.items():
@@ -377,7 +377,7 @@ if st.session_state.pred is not None:
         )
 
         custom_text = st.text_input(
-            "Or type a NEW custom category (hybrid: promoted after enough feedback):",
+            "Or type a NEW custom category :",
             value="",
         )
 
